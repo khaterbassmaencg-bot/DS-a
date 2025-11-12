@@ -16,11 +16,17 @@ William Steinbrunn
 Matthias Pfisterer
 
 Robert Detrano
+
 <img src="ghraphique 1.png" style="height:1000px;margin-right:1000px"/>
+
 <img src="ghraphe 2.png" style="height:1000px;margin-right:1000px"/>
+
 <img src="ghraphe 3.png" style="height:1000px;margin-right:1000px"/>
+
 <img src="ghraphe 4.png" style="height:1000px;margin-right:1000px"/>
+
 <img src="ghraphe 5.png" style="height:1000px;margin-right:1000px"/>
+
 <img src="ghraphique 6.png" style="height:1000px;margin-right:1000px"/>
 
 Data Analysis Key Findings
