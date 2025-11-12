@@ -22,6 +22,7 @@ Robert Detrano
 <img src="ghraphe 4.png" style="height:1000px;margin-right:1000px"/>
 <img src="ghraphe 5.png" style="height:1000px;margin-right:1000px"/>
 <img src="ghraphique 6.png" style="height:1000px;margin-right:1000px"/>
+
 Data Analysis Key Findings
 Age Distribution: The age distribution is somewhat normal, primarily centered around individuals in their 50s and 60s, suggesting a higher prevalence of heart disease in middle-aged to older populations within the dataset.
 Resting Blood Pressure (trestbps): The distribution is right-skewed, with most values concentrated between 120-140 mmHg, indicating that the majority of individuals have blood pressure in this range, with fewer having very high readings.
