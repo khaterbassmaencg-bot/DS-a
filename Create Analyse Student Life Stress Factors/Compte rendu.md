@@ -1,10 +1,10 @@
 # BASSMA KHATER
 
-<img src="https://github.com/kerdoudyasmineencg-arch/DS-1/blob/main/Analyse%20Student%20Life%20%26%20Stress%20Factors/Yasmine%20kerdoud%20CAC2.jpg" style="height:464px;margin-right:432px"/>
+<img src="https://github.com/khaterbassmaencg-bot/DS-a/blob/main/Create%20Analyse%20Student%20Life%20Stress%20Factors/Bassma%20khater%20image.jpg" style="height:464px;margin-right:432px"/>
 
 # CAC2
 
-# 22007236
+# 22007239
 
 
 # Compte rendu
