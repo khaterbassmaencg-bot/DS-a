@@ -1,0 +1,177 @@
+# -*- coding: utf-8 -*-
+"""Student Mental Health Analysis"""
+
+# Import necessary libraries and modules
+import numpy as np
+import pandas as pd
+import matplotlib
+matplotlib.use('Agg')  # Use non-interactive backend
+import matplotlib.pyplot as plt
+plt.switch_backend('Agg')
+import seaborn as sns
+import warnings
+
+# Suppress warnings
+warnings.filterwarnings('ignore')
+sns.set(style='whitegrid')
+
+# Load dataset
+file_path = '/kaggle/input/student-dataset/student_depression_dataset.csv'
+df = pd.read_csv(file_path, encoding='ascii', delimiter=',')
+
+print('Dataset loaded. Here is the head:')
+print(df.head())
+
+print('\nDataset Info:')
+print(df.info())
+
+print('Missing values:')
+print(df.isnull().sum())
+
+# Drop missing values
+df = df.dropna()
+
+# Convert Sleep Duration to numeric
+df['Sleep Duration Numeric'] = df['Sleep Duration'].str.extract(r'(\d+)', expand=False).astype(float)
+
+print('\nInfo after cleaning:')
+print(df.info())
+
+# Create a numeric dataframe
+numeric_df = df.select_dtypes(include=[np.number])
+
+# Reload dataset (duplicate from your file)
+data = pd.read_csv("/kaggle/input/student-dataset/student_depression_dataset.csv")
+df = pd.DataFrame(data)
+df.head()
+
+
+""" Exploratory Data Analysis """
+
+# Histogram Age Distribution
+plt.figure(figsize=(8, 6))
+sns.histplot(df['Age'], kde=True, bins=20)
+plt.title('Age Distribution')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.show()
+
+# Depression Count Plot
+plt.figure(figsize=(6, 4))
+sns.countplot(x='Depression', data=df, palette='pastel')
+plt.title('Depression Count')
+plt.xlabel('Depression Status')
+plt.ylabel('Count')
+plt.show()
+
+# Boxplot Academic Pressure by Depression
+plt.figure(figsize=(8,6))
+sns.boxplot(x='Depression', y='Academic Pressure', data=df, palette='Set2')
+plt.title('Academic Pressure by Depression Status')
+plt.show()
+
+# Pairplot
+selected_columns = [
+    'Age', 'Academic Pressure', 'Work Pressure', 'CGPA', 
+    'Study Satisfaction', 'Job Satisfaction', 'Work/Study Hours'
+]
+sns.pairplot(df[selected_columns])
+plt.show()
+
+# Correlation Heatmap
+if numeric_df.shape[1] >= 4:
+    plt.figure(figsize=(10, 8))
+    corr = numeric_df.corr()
+    sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
+    plt.title('Correlation Heatmap')
+    plt.show()
+
+# Study Satisfaction by Gender
+plt.figure(figsize=(8,6))
+sns.barplot(x='Gender', y='Study Satisfaction', data=df, palette='viridis', ci=None)
+plt.title('Study Satisfaction by Gender')
+plt.show()
+
+""" Machine Learning Model """
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+# Feature selection
+features = [
+    'Age', 'Academic Pressure', 'Work Pressure', 'CGPA', 
+    'Study Satisfaction', 'Job Satisfaction', 'Work/Study Hours', 
+    'Sleep Duration Numeric'
+]
+
+X = df[features]
+y = df['Depression']
+
+X = X.fillna(X.mean())
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Logistic Regression Model
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print('Accuracy of Logistic Regression:', accuracy)
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+
+""" Additional Barplots """
+
+target = 'Depression'
+bar_cols = df.select_dtypes(include=['object', 'category']).columns.drop(target, errors='ignore')
+
+b_features = len(bar_cols)
+b_cols = 2
+b_rows = (b_features + b_cols - 1) // b_cols
+
+fig, axes = plt.subplots(b_rows, b_cols, figsize=(12, b_rows*3))
+axes = axes.flatten()
+
+for i, col in enumerate(bar_cols):
+    counts = df.groupby([col, target]).size().reset_index(name='count')
+
+    sns.barplot(
+        x=col,
+        y='count',
+        hue=target,
+        data=counts,
+        ax=axes[i]
+    )
+    axes[i].set_title(f"Barplot of {col} by {target}")
+    axes[i].set_xlabel(col)
+    axes[i].set_ylabel("Count")
+    axes[i].tick_params(axis='x', rotation=45)
+    axes[i].legend(title=target)
+
+for j in range(i + 1, len(axes)):
+    axes[j].axis('off')
+
+plt.tight_layout()
+plt.show()
+
+""" Conclusion """
+print("""
+This notebook provided a complete analysis of the student depression dataset.
+EDA, data cleaning, visualizations, and a logistic regression model were implemented.
+Future work may include advanced ML models (Random Forest, XGBoost) and deeper feature engineering.
+""")
