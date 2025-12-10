@@ -1,165 +1,114 @@
+Student Life and Stress Factors – Rapport d'Analyse
+1. Introduction
 
-# 📘 **Student Life and Stress Factors – Rapport d’Analyse**
+Ce rapport présente l'analyse d'un ensemble de données portant sur les habitudes de vie des étudiants et les facteurs associés au stress.
+L'objectif est d'identifier les variables ayant le plus d'influence sur le niveau de stress des étudiants.
 
-## 🟦 1. Introduction
+Les données analysées proviennent du fichier : Student Stress Factors.csv.
 
-Ce rapport présente l’analyse d’un ensemble de données portant sur les habitudes de vie des étudiants et les facteurs associés au stress.
-L’objectif est d’identifier les variables influençant le niveau de stress, à travers une analyse statistique et graphique réalisée en Python.
+2. Contexte de l'Étude
 
-Les données proviennent du fichier : **Student Stress Factors.csv**
+L'étude s'intéresse à plusieurs comportements et habitudes quotidiennes des étudiants, notamment :
 
----
+Qualité du sommeil
 
-## 🟦 2. Contexte de l’Étude
+Fréquence des maux de tête
 
-L’étude s’intéresse aux comportements et habitudes quotidiennes des étudiants :
+Performance académique
 
-* Qualité du sommeil
-* Fréquence des maux de tête
-* Performance académique
-* Activité physique
-* Consommation de caféine
-* Stress perçu
+Activité physique
 
-Ces facteurs sont analysés afin de mieux comprendre ce qui contribue à l’augmentation ou à la diminution du stress chez les étudiants.
+Consommation de caféine
 
----
+Niveau de stress déclaré
 
-## 🟦 3. Objectifs
+L'analyse vise à dégager les liens entre ces facteurs et le stress.
 
-Les objectifs principaux sont :
+3. Objectifs
 
-* Identifier les relations entre les habitudes de vie et le stress.
-* Décrire statistiquement les variables.
-* Visualiser les relations importantes.
-* Déduire les facteurs les plus significatifs.
+Les objectifs de l'étude sont :
 
----
+Décrire les variables statistiquement
 
-# 🟦 4. Chargement et Exploration des Données
+Visualiser les distributions et relations
 
-### 📥 **4.1 Importation des données**
+Identifier les facteurs les plus corrélés au stress
 
-```python
+Fournir une interprétation claire des résultats
+
+4. Chargement et Exploration des Données
+4.1 Importation des données
 import pandas as pd
 
 df = pd.read_csv("Student Stress Factors.csv")
 df.head()
-```
 
-### 📊 **4.2 Statistiques descriptives**
-
-```python
+4.2 Statistiques descriptives
 df.describe(include='all')
-```
 
----
-
-# 🟦 5. Nettoyage des Données
-
-### 🔧 **5.1 Vérification des valeurs manquantes**
-
-```python
+5. Nettoyage des Données
+5.1 Vérification des valeurs manquantes
 df.isnull().sum()
-```
 
-Aucune valeur manquante significative n’a été détectée.
 
-### 🔧 5.2 Formats des variables
+Aucune valeur manquante critique n'a été détectée.
 
-Les variables numériques ont été identifiées correctement (sleep, headaches, stress, etc.).
-
----
-
-# 🟦 6. Analyse des Données
-
-## 📈 6.1 Analyse univariée
-
-### 🔹 Distribution du niveau de stress
-
-```python
+6. Analyse des Données
+6.1 Distribution du niveau de stress
 import matplotlib.pyplot as plt
 
 plt.hist(df["How would you rate your stress levels?"])
 plt.title("Distribution des niveaux de stress")
-plt.xlabel("Stress Level")
-plt.ylabel("Effectif")
+plt.xlabel("Stress level")
+plt.ylabel("Fréquence")
 plt.show()
-```
 
----
-
-## 🔗 6.2 Analyse bivariée
-
-### 🔹 Relation : Sommeil vs Stress
-
-```python
+6.2 Relation entre sommeil et stress
 df[[
-    "Kindly Rate your Sleep Quality 😴",
+    "Kindly Rate your Sleep Quality",
     "How would you rate your stress levels?"
 ]].corr()
-```
 
-### 🔹 Visualisation
-
-```python
+6.3 Visualisation
 plt.scatter(
-    df["Kindly Rate your Sleep Quality 😴"],
+    df["Kindly Rate your Sleep Quality"],
     df["How would you rate your stress levels?"]
 )
 plt.xlabel("Qualité du sommeil")
 plt.ylabel("Niveau de stress")
 plt.title("Relation entre sommeil et stress")
 plt.show()
-```
 
-### 🔹 Autres relations analysées
+7. Interprétation des Résultats
+Qualité du sommeil
 
-* Stress vs Fréquence des maux de tête
-* Stress vs Performance académique
-* Stress vs Activité physique
+Une tendance claire montre qu'une mauvaise qualité du sommeil est associée à un niveau de stress plus élevé.
 
----
+Maux de tête
 
-# 🟦 7. Interprétation des Résultats
+Les étudiants qui déclarent des maux de tête fréquents ont généralement un stress plus important.
 
-### 🔹 **Qualité du sommeil**
+Performance académique
 
-Une mauvaise qualité du sommeil est fortement associée à un **stress plus élevé**.
+Les étudiants considérant leur performance comme faible ou moyenne présentent un stress plus élevé.
 
-### 🔹 **Maux de tête**
+Activité physique
 
-Les étudiants souffrant fréquemment de maux de tête présentent des niveaux de stress plus élevés.
+L'activité physique semble avoir un effet atténuant sur le stress.
 
-### 🔹 **Performance académique**
+8. Conclusion
 
-Une performance perçue comme faible ou moyenne est liée à un stress accru.
+Les trois facteurs les plus déterminants dans les niveaux de stress sont :
 
-### 🔹 **Activité physique**
+Qualité du sommeil
 
-Une activité physique régulière semble réduire le niveau de stress.
+Fréquence des maux de tête
 
-### 🔹 **Caféine**
+Performance académique perçue
 
-La corrélation est modérée : une consommation élevée peut augmenter le stress.
+Ces résultats permettent de mieux comprendre les mécanismes du stress chez les étudiants.
 
----
-
-# 🟦 8. Conclusion Générale
-
-Les résultats montrent que les trois facteurs les plus déterminants dans l’augmentation du stress chez les étudiants sont :
-
-1. **La qualité du sommeil** (impact majeur)
-2. **La fréquence des maux de tête**
-3. **La performance académique perçue**
-
-Ces résultats peuvent servir de base pour des recommandations en matière de santé mentale et d’organisation du mode de vie étudiant.
-
----
-
-## 📌 9. Code Source Complet Utilisé
-
-```python
+9. Code complet utilisé
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -169,10 +118,10 @@ df = pd.read_csv("Student Stress Factors.csv")
 # Preview
 print(df.head())
 
-# Summary statistics
+# Description
 print(df.describe(include="all"))
 
-# Missing values
+# Missing values check
 print(df.isnull().sum())
 
 # Stress distribution
@@ -184,21 +133,21 @@ plt.show()
 
 # Correlation Sleep vs Stress
 print(df[[
-    "Kindly Rate your Sleep Quality 😴",
+    "Kindly Rate your Sleep Quality",
     "How would you rate your stress levels?"
 ]].corr())
 
-# Scatter plot Sleep vs Stress
+# Scatter plot
 plt.scatter(
-    df["Kindly Rate your Sleep Quality 😴"],
+    df["Kindly Rate your Sleep Quality"],
     df["How would you rate your stress levels?"]
 )
-plt.xlabel("Sleep Quality")
-plt.ylabel("Stress Level")
-plt.title("Relationship: Sleep Quality vs Stress")
+plt.xlabel("Qualité du sommeil")
+plt.ylabel("Niveau de stress")
+plt.title("Relation entre sommeil et stress")
 plt.show()
-```
 
----
+
+
 
 
