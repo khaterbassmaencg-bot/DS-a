@@ -111,8 +111,11 @@ import pandas as pd
 
 df = pd.read_csv("Student Stress Factors.csv")
 df.head()
+6.2 Statistiques descriptives
 df.describe(include='all')
+6.3 Vérification des valeurs manquantes
 df.isnull().sum()
+7. Analyse Statistique et Visualisations
 import matplotlib.pyplot as plt
 
 plt.hist(df["How would you rate your stress levels?"])
@@ -169,3 +172,36 @@ de la santé physique
 du vécu académique
 
 sur l’état de stress.
+10. Limites de l’Étude
+
+données auto-rapportées (biais possibles)
+
+corrélation ≠ causalité
+
+absence d’informations démographiques
+
+taille et représentativité de l’échantillon non précisées
+
+Les conclusions doivent donc être interprétées avec prudence.
+
+11. Conclusion et Recommandations
+
+Cette étude a permis d’identifier les principaux facteurs associés au stress étudiant.
+
+Les pistes d’action prioritaires sont :
+
+promouvoir une bonne hygiène de sommeil
+
+encourager l’activité physique régulière
+
+renforcer le soutien académique
+
+sensibiliser aux risques psychosociaux
+
+Les résultats peuvent être utiles pour :
+
+établissements universitaires
+
+services d’accompagnement étudiant
+
+programmes de prévention du stress
